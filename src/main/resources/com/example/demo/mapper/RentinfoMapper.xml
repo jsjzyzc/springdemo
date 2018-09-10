@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.RentinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Rentinfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="tim" property="tim" jdbcType="INTEGER" />
+    <result column="deposit" property="deposit" jdbcType="DOUBLE" />
+    <result column="kucun" property="kucun" jdbcType="INTEGER" />
+    <result column="headimgurl" property="headimgurl" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="INTEGER" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="uptime" property="uptime" jdbcType="TIMESTAMP" />
+    <result column="lasttime" property="lasttime" jdbcType="TIMESTAMP" />
+    <result column="active" property="active" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.demo.entity.Rentinfo" extends="BaseResultMap" >
+    <result column="img" property="img" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <select id="selectAllRent" resultType="com.example.demo.entity.Rentinfo">
+    SELECT * FROM rentinfo
+  </select>
+  <select id="selectRentById" parameterType="java.lang.Integer" resultType="com.example.demo.entity.Rentinfo">
+    SELECT *  FROM rentinfo
+    WHERE id=#{rentId,jdbcType=INTEGER}
+  </select>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, content, price, tim, deposit, kucun, headimgurl, nickname, QQ, openid, 
+    uptime, lasttime, active
+  </sql>
+  <sql id="Blob_Column_List" >
+    img
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.example.demo.entity.RentinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from rentinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.RentinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rentinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from rentinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rentinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.demo.entity.RentinfoExample" >
+    delete from rentinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Rentinfo" >
+    insert into rentinfo (id, title, content, 
+      price, tim, deposit, 
+      kucun, headimgurl, nickname, 
+      QQ, openid, uptime, 
+      lasttime, active, img
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{tim,jdbcType=INTEGER}, #{deposit,jdbcType=DOUBLE}, 
+      #{kucun,jdbcType=INTEGER}, #{headimgurl,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{uptime,jdbcType=TIMESTAMP}, 
+      #{lasttime,jdbcType=TIMESTAMP}, #{active,jdbcType=INTEGER}, #{img,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.Rentinfo" >
+    insert into rentinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="tim != null" >
+        tim,
+      </if>
+      <if test="deposit != null" >
+        deposit,
+      </if>
+      <if test="kucun != null" >
+        kucun,
+      </if>
+      <if test="headimgurl != null" >
+        headimgurl,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="uptime != null" >
+        uptime,
+      </if>
+      <if test="lasttime != null" >
+        lasttime,
+      </if>
+      <if test="active != null" >
+        active,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="tim != null" >
+        #{tim,jdbcType=INTEGER},
+      </if>
+      <if test="deposit != null" >
+        #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="kucun != null" >
+        #{kucun,jdbcType=INTEGER},
+      </if>
+      <if test="headimgurl != null" >
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="uptime != null" >
+        #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="active != null" >
+        #{active,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.demo.entity.RentinfoExample" resultType="java.lang.Integer" >
+    select count(*) from rentinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rentinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tim != null" >
+        tim = #{record.tim,jdbcType=INTEGER},
+      </if>
+      <if test="record.deposit != null" >
+        deposit = #{record.deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kucun != null" >
+        kucun = #{record.kucun,jdbcType=INTEGER},
+      </if>
+      <if test="record.headimgurl != null" >
+        headimgurl = #{record.headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        QQ = #{record.qq,jdbcType=INTEGER},
+      </if>
+      <if test="record.openid != null" >
+        openid = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uptime != null" >
+        uptime = #{record.uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lasttime != null" >
+        lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.active != null" >
+        active = #{record.active,jdbcType=INTEGER},
+      </if>
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update rentinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      tim = #{record.tim,jdbcType=INTEGER},
+      deposit = #{record.deposit,jdbcType=DOUBLE},
+      kucun = #{record.kucun,jdbcType=INTEGER},
+      headimgurl = #{record.headimgurl,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      QQ = #{record.qq,jdbcType=INTEGER},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      uptime = #{record.uptime,jdbcType=TIMESTAMP},
+      lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+      active = #{record.active,jdbcType=INTEGER},
+      img = #{record.img,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rentinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      tim = #{record.tim,jdbcType=INTEGER},
+      deposit = #{record.deposit,jdbcType=DOUBLE},
+      kucun = #{record.kucun,jdbcType=INTEGER},
+      headimgurl = #{record.headimgurl,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      QQ = #{record.qq,jdbcType=INTEGER},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      uptime = #{record.uptime,jdbcType=TIMESTAMP},
+      lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+      active = #{record.active,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Rentinfo" >
+    update rentinfo
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="tim != null" >
+        tim = #{tim,jdbcType=INTEGER},
+      </if>
+      <if test="deposit != null" >
+        deposit = #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="kucun != null" >
+        kucun = #{kucun,jdbcType=INTEGER},
+      </if>
+      <if test="headimgurl != null" >
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="uptime != null" >
+        uptime = #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttime != null" >
+        lasttime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.demo.entity.Rentinfo" >
+    update rentinfo
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      tim = #{tim,jdbcType=INTEGER},
+      deposit = #{deposit,jdbcType=DOUBLE},
+      kucun = #{kucun,jdbcType=INTEGER},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=INTEGER},
+      openid = #{openid,jdbcType=VARCHAR},
+      uptime = #{uptime,jdbcType=TIMESTAMP},
+      lasttime = #{lasttime,jdbcType=TIMESTAMP},
+      active = #{active,jdbcType=INTEGER},
+      img = #{img,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Rentinfo" >
+    update rentinfo
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      tim = #{tim,jdbcType=INTEGER},
+      deposit = #{deposit,jdbcType=DOUBLE},
+      kucun = #{kucun,jdbcType=INTEGER},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=INTEGER},
+      openid = #{openid,jdbcType=VARCHAR},
+      uptime = #{uptime,jdbcType=TIMESTAMP},
+      lasttime = #{lasttime,jdbcType=TIMESTAMP},
+      active = #{active,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.ProductinfoMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Productinfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="txtQty" property="txtqty" jdbcType="INTEGER"/>
+        <result column="product" property="product" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="preprice" property="preprice" jdbcType="INTEGER"/>
+        <result column="openid" property="openid" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="headimgurl" property="headimgurl" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="QQ" property="qq" jdbcType="INTEGER"/>
+        <result column="fapiao" property="fapiao" jdbcType="INTEGER"/>
+        <result column="lasttime" property="lasttime" jdbcType="TIMESTAMP"/>
+        <result column="active" property="active" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.example.demo.entity.Productinfo" extends="BaseResultMap">
+        <result column="img" property="img" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <select id="selectAllProduct" resultType="com.example.demo.entity.Productinfo">
+    SELECT * FROM productinfo
+  </select>
+    <select id="selectProductByType" parameterType="java.lang.String" resultType="com.example.demo.entity.Productinfo">
+        SELECT * FROM productinfo
+        WHERE product = #{producttype,jdbcType=VARCHAR}
+    </select>
+    <select id="selectProductType" resultType="com.example.demo.entity.Productinfo">
+    SELECT * FROM productinfo
+    GROUP BY product
+  </select>
+    <select id="selectProductById" parameterType="java.lang.Integer" resultType="com.example.demo.entity.Productinfo">
+    SELECT *  FROM productinfo
+    WHERE id=#{productId,jdbcType=INTEGER}
+  </select>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, title, content, txtQty, product, price, preprice, openid, time, headimgurl, nickname, 
+    QQ, fapiao, lasttime, active
+  </sql>
+    <sql id="Blob_Column_List">
+    img
+  </sql>
+    <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+            parameterType="com.example.demo.entity.ProductinfoExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from productinfo
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.ProductinfoExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from productinfo
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from productinfo
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from productinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.example.demo.entity.ProductinfoExample">
+        delete from productinfo
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.example.demo.entity.Productinfo">
+    insert into productinfo (id, title, content, 
+      txtQty, product, price, 
+      preprice, openid, time, 
+      headimgurl, nickname, QQ, 
+      fapiao, lasttime, active, 
+      img)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{txtqty,jdbcType=INTEGER}, #{product,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
+      #{preprice,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{headimgurl,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{qq,jdbcType=INTEGER}, 
+      #{fapiao,jdbcType=INTEGER}, #{lasttime,jdbcType=TIMESTAMP}, #{active,jdbcType=INTEGER}, 
+      #{img,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.demo.entity.Productinfo">
+        insert into productinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="txtqty != null">
+                txtQty,
+            </if>
+            <if test="product != null">
+                product,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="preprice != null">
+                preprice,
+            </if>
+            <if test="openid != null">
+                openid,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="headimgurl != null">
+                headimgurl,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="qq != null">
+                QQ,
+            </if>
+            <if test="fapiao != null">
+                fapiao,
+            </if>
+            <if test="lasttime != null">
+                lasttime,
+            </if>
+            <if test="active != null">
+                active,
+            </if>
+            <if test="img != null">
+                img,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="txtqty != null">
+                #{txtqty,jdbcType=INTEGER},
+            </if>
+            <if test="product != null">
+                #{product,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=INTEGER},
+            </if>
+            <if test="preprice != null">
+                #{preprice,jdbcType=INTEGER},
+            </if>
+            <if test="openid != null">
+                #{openid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="headimgurl != null">
+                #{headimgurl,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                #{qq,jdbcType=INTEGER},
+            </if>
+            <if test="fapiao != null">
+                #{fapiao,jdbcType=INTEGER},
+            </if>
+            <if test="lasttime != null">
+                #{lasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="active != null">
+                #{active,jdbcType=INTEGER},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.example.demo.entity.ProductinfoExample"
+            resultType="java.lang.Integer">
+        select count(*) from productinfo
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update productinfo
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.content != null">
+                content = #{record.content,jdbcType=VARCHAR},
+            </if>
+            <if test="record.txtqty != null">
+                txtQty = #{record.txtqty,jdbcType=INTEGER},
+            </if>
+            <if test="record.product != null">
+                product = #{record.product,jdbcType=VARCHAR},
+            </if>
+            <if test="record.price != null">
+                price = #{record.price,jdbcType=INTEGER},
+            </if>
+            <if test="record.preprice != null">
+                preprice = #{record.preprice,jdbcType=INTEGER},
+            </if>
+            <if test="record.openid != null">
+                openid = #{record.openid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.time != null">
+                time = #{record.time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.headimgurl != null">
+                headimgurl = #{record.headimgurl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nickname != null">
+                nickname = #{record.nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qq != null">
+                QQ = #{record.qq,jdbcType=INTEGER},
+            </if>
+            <if test="record.fapiao != null">
+                fapiao = #{record.fapiao,jdbcType=INTEGER},
+            </if>
+            <if test="record.lasttime != null">
+                lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.active != null">
+                active = #{record.active,jdbcType=INTEGER},
+            </if>
+            <if test="record.img != null">
+                img = #{record.img,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update productinfo
+        set id = #{record.id,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        content = #{record.content,jdbcType=VARCHAR},
+        txtQty = #{record.txtqty,jdbcType=INTEGER},
+        product = #{record.product,jdbcType=VARCHAR},
+        price = #{record.price,jdbcType=INTEGER},
+        preprice = #{record.preprice,jdbcType=INTEGER},
+        openid = #{record.openid,jdbcType=VARCHAR},
+        time = #{record.time,jdbcType=TIMESTAMP},
+        headimgurl = #{record.headimgurl,jdbcType=VARCHAR},
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+        QQ = #{record.qq,jdbcType=INTEGER},
+        fapiao = #{record.fapiao,jdbcType=INTEGER},
+        lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+        active = #{record.active,jdbcType=INTEGER},
+        img = #{record.img,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update productinfo
+        set id = #{record.id,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        content = #{record.content,jdbcType=VARCHAR},
+        txtQty = #{record.txtqty,jdbcType=INTEGER},
+        product = #{record.product,jdbcType=VARCHAR},
+        price = #{record.price,jdbcType=INTEGER},
+        preprice = #{record.preprice,jdbcType=INTEGER},
+        openid = #{record.openid,jdbcType=VARCHAR},
+        time = #{record.time,jdbcType=TIMESTAMP},
+        headimgurl = #{record.headimgurl,jdbcType=VARCHAR},
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+        QQ = #{record.qq,jdbcType=INTEGER},
+        fapiao = #{record.fapiao,jdbcType=INTEGER},
+        lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+        active = #{record.active,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Productinfo">
+        update productinfo
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="txtqty != null">
+                txtQty = #{txtqty,jdbcType=INTEGER},
+            </if>
+            <if test="product != null">
+                product = #{product,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=INTEGER},
+            </if>
+            <if test="preprice != null">
+                preprice = #{preprice,jdbcType=INTEGER},
+            </if>
+            <if test="openid != null">
+                openid = #{openid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="headimgurl != null">
+                headimgurl = #{headimgurl,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                QQ = #{qq,jdbcType=INTEGER},
+            </if>
+            <if test="fapiao != null">
+                fapiao = #{fapiao,jdbcType=INTEGER},
+            </if>
+            <if test="lasttime != null">
+                lasttime = #{lasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="active != null">
+                active = #{active,jdbcType=INTEGER},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.demo.entity.Productinfo">
+    update productinfo
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      txtQty = #{txtqty,jdbcType=INTEGER},
+      product = #{product,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      preprice = #{preprice,jdbcType=INTEGER},
+      openid = #{openid,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=INTEGER},
+      fapiao = #{fapiao,jdbcType=INTEGER},
+      lasttime = #{lasttime,jdbcType=TIMESTAMP},
+      active = #{active,jdbcType=INTEGER},
+      img = #{img,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Productinfo">
+    update productinfo
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      txtQty = #{txtqty,jdbcType=INTEGER},
+      product = #{product,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      preprice = #{preprice,jdbcType=INTEGER},
+      openid = #{openid,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=INTEGER},
+      fapiao = #{fapiao,jdbcType=INTEGER},
+      lasttime = #{lasttime,jdbcType=TIMESTAMP},
+      active = #{active,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

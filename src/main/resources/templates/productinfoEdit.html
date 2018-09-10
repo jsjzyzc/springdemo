@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>信工二手淘</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <style>
+        .lb {
+            width: 100%;
+            height: 40px;
+            font-family: MingLiU_HKSCS;
+            color: #234f3c;
+            background: -moz-linear-gradient(
+                    top,
+                    #445A51 0%,
+                    #475e54 50%,
+                    #d8d8db);
+            background: -webkit-gradient(
+                    linear, left top, left bottom,
+                    from(#82a698),
+                    color-stop(0.50, #627e72),
+                    to(#96a8a0));
+            border-radius: 5px;
+            border: 1px solid #475e54;
+            width: 100px;
+            height: 35px;
+        }
+
+        a:link {
+            color: #91ADA1;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: #445A51;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #91ADA1;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: #445A51;
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body background="/static/img/bgshouye.jpg" style="width: 100%">
+
+<div class="row" style="margin-top: 80px; margin-left: 100px">
+    <div class="col-md-4" style="font-family:'MingLiU_HKSCS';font-weight: 100;color:#445A51;">
+        <div class="panel panel-yellow">
+            <h4 th:text="请慎重修改市场商品信息"></h4></div>
+        <div class="panel-body pan">
+            <form action="/index/editproduct" class="form-horizontal">
+                <div class="form-group">
+                    <label th:text="'id---'+${product.id}"></label>
+                    <input type="text" name="id" class="form-control" readonly="readonly" th:value="${product.id}">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品标题(Title)---'+${product.title}"></label>
+                    <input type="text" name="title" class="form-control" th:value="${product.title}">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品内容(Content)---'+${product.content}"></label>
+                    <input type="text" th:value="${product.content}" name="content" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品数量(TxtQty)---'+${product.txtqty}"></label>
+                    <input type="text" th:value="${product.content}" name="txtqty" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品类别(Product)---'+${product.product}"></label>
+                    <input type="text" th:value="${product.product}" name="product" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品价格(Price)---'+${product.price}"></label>
+                    <input type="text" th:value="${product.price}" name="price" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品原价(PrePrice)---'+${product.preprice}"></label>
+                    <input type="text" th:value="${product.preprice}" name="preprice" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'发布时间(Time)---'+${#dates.format(product.time,'yyyy-MM-dd HH:mm:ss')}"></label>
+                    <input type="text" th:value="${#dates.format(product.time,'yyyy-MM-dd HH:mm:ss')}" name="time"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品图片(Img)---'+${product.img}"></label>
+                    <input type="text" th:value="${product.img}" name="img" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'发布者微信识别Id(OpenId)---'+${product.openid}"></label>
+                    <input type="text" th:value="${product.openid}" name="openid" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'发布者微信头像(HeadImgUrl)---'+${product.headimgurl}"></label>
+                    <input type="text" th:value="${product.headimgurl}" name="headimgurl" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'发布者微信昵称(NickName)---'+${product.nickname}"></label>
+                    <input type="text" th:value="${product.nickname}" name="nickname" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'发布人QQ号(Qq)---'+${product.qq}"></label>
+                    <input type="text" th:value="${product.qq}" name="qq" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'是否有发票-1有，0无(FaPiao)---'+${product.fapiao}"></label>
+                    <input type="text" th:value="${product.fapiao}" name="fapiao" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'最后操作时间(LastTime)---'+${#dates.format(product.lasttime,'yyyy-MM-dd HH:mm:ss')}"></label>
+                    <input type="text" th:value="${#dates.format(product.lasttime,'yyyy-MM-dd HH:mm:ss')}" name="lasttime"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'是否上架-1上，0下(Active)---'+${product.active}"></label>
+                    <input type="text" th:value="${product.active}" name="active" class="form-control">
+                </div>
+                <div class="form-actions pal">
+                    <div class="form-group mbn">
+                        <div class="col-md-offset-3 col-md-6">
+                            <button type="submit" class="lb">
+                                提交修改
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>信工二手淘</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Loading bootstrap css-->
+    <!--  <link type="text/css" rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:400italic,400,300,700">
+      <link type="text/css" rel="stylesheet" href="http://fonts.useso.com/css?family=Oswald:400,700,300">-->
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/jquery-ui-1.10.4.custom.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/animate.css">
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/all.css">
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/main.css">
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/style-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/zabuto_calendar.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/pace.css">
+    <link type="text/css" rel="stylesheet" href="/static/demo/styles/jquery.news-ticker.css">
+</head>
+
+<body>
+<div>
+    <!--BEGIN TOPBAR-->
+    <div id="header-topbar-option-demo" class="page-header-topbar">
+        <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3"
+             class="navbar navbar-default navbar-static-top">
+            <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="logo" class="navbar-brand">
+                    <span class="fa fa-rocket"></span>
+                    <span class="logo-text">信工二手淘</span>
+                    <span style="display: none" class="logo-text-icon"></span>
+                </a>
+            </div>
+            <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+
+                <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
+                    <div class="input-icon right text-white"><a href="#"><i class="fa fa-search"></i></a><input
+                            type="text" placeholder="Search here..." class="form-control text-white"/></div>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <!--END TOPBAR-->
+    <div id="wrapper">
+        <!--BEGIN SIDEBAR MENU-->
+        <nav id="sidebar" role="navigation" data-step="2"
+             data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
+             data-position="right" class="navbar-default navbar-static-side">
+            <div class="sidebar-collapse menu-scroll">
+                <ul id="side-menu" class="nav">
+
+                    <div class="clearfix"></div>
+                    <li><a href="/index/toIndex"><i class="fa fa-home">
+                        <div class="icon-bg bg-orange"></div>
+                    </i><span class="menu-title">首页详情</span></a>
+                    </li>
+                    <li><a href="/index/productinfo/1/all">
+                        <i class="fa fa-briefcase">
+                            <div class="icon-bg bg-green"></div>
+                        </i><span class="menu-title">市场管理</span></a>
+                    </li>
+                    <li><a href="/index/rentinfo/1">
+                        <i class="fa fa-money">
+                            <div class="icon-bg bg-green"></div>
+                        </i><span class="menu-title">租赁管理</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="/index/userinfo/1">
+                            <i class="fa fa-user">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">用户管理</span></a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa fa-edit">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">首页轮播修改</span></a>
+                    </li>
+                    <li>
+                        <a href="">0
+                            <i class="fa fa-delicious">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">用户留言删除</span></a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa fa-check-square">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">投诉建议</span></a>
+                    </li>
+                    </li>
+                    <li><a href="/toLogin"><i class="fa fa-arrow-circle-right">
+                        <div class="icon-bg bg-green"></div>
+                    </i><span class="menu-title">返回登录</span></a>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--END SIDEBAR MENU-->
+
+        <!--BEGIN PAGE WRAPPER-->
+        <div id="page-wrapper">
+            <!--BEGIN TITLE & BREADCRUMB PAGE-->
+            <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+                <div class="page-header pull-left">
+                    <div class="page-title">
+                        <span style="font-size: 24px;" th:text="'当前登录用户是：'+${session.nowUser.username}"></span>
+                    </div>
+                </div>
+                <ol class="breadcrumb page-breadcrumb pull-right">
+                    <li><i class="fa fa-home"></i>&nbsp;<a>主页</a>&nbsp;&nbsp;
+                        <i class="fa fa-angle-right"></i>&nbsp;&nbsp;
+                    </li>
+                </ol>
+                <div class="clearfix">
+                </div>
+            </div>
+            <!--END TITLE & BREADCRUMB PAGE-->
+            <!--BEGIN CONTENT-->
+            <div class="page-content">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-dark">
+                                <div class="panel-heading"><h3 th:text="'你好，'+${session.nowUser.username}"></h3>
+                                    <h4 th:text="'你的权限是 '+${session.nowUser.power}"></h4>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>头像地址</th>
+                                            <th>id</th>
+                                            <th>识别码</th>
+                                            <th>用户名</th>
+                                            <th>性别</th>
+                                            <th>国家</th>
+                                            <th>省份</th>
+                                            <th>城市</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="user:${Users}">
+                                            <td><img th:src="@{${user.headimgurl}}" height="60px"></td>
+                                            <td th:text="${user.id}">id</td>
+                                            <td th:text="${user.openid}">识别码</td>
+                                            <td th:text="${user.nickname}">用户名</td>
+                                            <td th:text="${user.sex}">性别</td>
+                                            <td th:text="${user.country}">国家</td>
+                                            <td th:text="${user.province}">省份</td>
+                                            <td th:text="${user.city}">城市</td>
+                                            <td>
+                                               <!-- <a th:href="'/index/edituser/'+${user.id}" class="btn btn-green"
+                                                   target="_blank">修改</a>-->
+                                               <!-- <a th:href="'/index/selecteUser/'+${user.id}"
+                                                   class="btn btn-primary">查看发布</a>-->
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <center>
+                            <ul class="pagination">
+                                <li th:each="NowPage:${UserPage.getNavigatepageNums()}"
+                                    th:class="${NowPage}==${UserPage.pageNum}?'active':''">
+                                    <a th:text="${NowPage}" th:href="'/index/userinfo/'+${NowPage}">当前页数加粗</a>
+                                </li>
+                            </ul>
+                        </center>
+                    </div>
+                </div>
+                <!--END CONTENT-->
+            </div>
+            <!--END PAGE WRAPPER-->
+        </div>
+    </div>
+</div>
+</body>
+<script src="/static/demo/script/jquery-1.10.2.min.js"></script>
+<script src="/static/demo/script/jquery-migrate-1.2.1.min.js"></script>
+<script src="/static/demo/script/jquery-ui.js"></script>
+<script src="/static/demo/script/bootstrap.min.js"></script>
+<script src="/static/demo/script/bootstrap-hover-dropdown.js"></script>
+<script src="/static/demo/script/html5shiv.js"></script>
+<script src="/static/demo/script/respond.min.js"></script>
+<script src="/static/demo/script/jquery.metisMenu.js"></script>
+<script src="/static/demo/script/jquery.slimscroll.js"></script>
+<script src="/static/demo/script/jquery.cookie.js"></script>
+<script src="/static/demo/script/icheck.min.js"></script>
+<script src="/static/demo/script/custom.min.js"></script>
+<script src="/static/demo/script/jquery.news-ticker.js"></script>
+<script src="/static/demo/script/jquery.menu.js"></script>
+<script src="/static/demo/script/pace.min.js"></script>
+<script src="/static/demo/script/holder.js"></script>
+<script src="/static/demo/script/responsive-tabs.js"></script>
+<script src="/static/demo/script/zabuto_calendar.min.js"></script>
+
+<script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+<script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+<!--CORE JAVASCRIPT-->
+<script src="/static/demo/script/main.js"></script>
+
+</html>

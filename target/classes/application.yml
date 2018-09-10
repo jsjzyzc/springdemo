@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: Aa19950813@
+    url: jdbc:mysql://39.104.90.244:3306/ErTaos2XinGong?useSSL=true&useUnicode=true&characterEncoding=UTF-8
+  ##########热部署配置##########
+  thymeleaf:
+    cache: false
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+  ###########Maybtis配置###############
+mybatis:
+  type-aliases-package: com.example.demo.model
+  mapper-locations: com.example.demo.mapper/*.xml
+#pagehelper分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+server:
+  port: 9010
+  # 打印sql
+logging:
+    level:
+       com.example.demo.mapper : debug

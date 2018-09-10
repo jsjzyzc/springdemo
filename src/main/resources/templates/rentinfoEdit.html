@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>信工二手淘</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <style>
+        .lb {
+            width: 100%;
+            height: 40px;
+            font-family: MingLiU_HKSCS;
+            color: #234f3c;
+            background: -moz-linear-gradient(
+                    top,
+                    #445A51 0%,
+                    #475e54 50%,
+                    #d8d8db);
+            background: -webkit-gradient(
+                    linear, left top, left bottom,
+                    from(#82a698),
+                    color-stop(0.50, #627e72),
+                    to(#96a8a0));
+            border-radius: 5px;
+            border: 1px solid #475e54;
+            width: 100px;
+            height: 35px;
+        }
+
+        a:link {
+            color: #91ADA1;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: #445A51;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #91ADA1;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: #445A51;
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body background="/static/img/bgshouye.jpg" style="width: 100%">
+
+<div class="row" style="margin-top: 80px; margin-left: 100px">
+    <div class="col-md-4" style="font-family:'MingLiU_HKSCS';font-weight: 100;color:#445A51;">
+        <div class="panel panel-yellow">
+            <h4 th:text="请慎重修改租赁订单信息"></h4></div>
+        <div class="panel-body pan">
+            <form action="/index/editrent" class="form-horizontal">
+                <div class="form-group">
+                    <label th:text="'id---'+${rent.id}"></label>
+                    <input type="text" name="id" class="form-control" readonly="readonly" th:value="${rent.id}">
+                </div>
+                <div class="form-group">
+                    <label th:text="'租赁商品标题(Title)---'+${rent.title}"></label>
+                    <input type="text" th:value="${rent.title}" name="title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'租赁商品内容(Content)---'+${rent.content}"></label>
+                    <input type="text" th:value="${rent.content}" name="content" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'租赁商品图片(Img)---'+${rent.img}"></label>
+                    <input type="text" th:value="${rent.img}" name="img" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品价格 元/天(Price)---'+${rent.price}"></label>
+                    <input type="text" th:value="${rent.price}" name="price" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'租赁天数(Tim)---'+${rent.tim}"></label>
+                    <input type="text" th:value="${rent.tim}" name="tim" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'租赁押金(Deposit)---'+${rent.deposit}"></label>
+                    <input type="text" th:value="${rent.deposit}" name="deposit" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品库存(KuCun):---'+${rent.kucun}"></label>
+                    <input type="text" th:value="${rent.kucun}" name="kucun" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'租赁者头像(HeadImgUrl)---'+${rent.headimgurl}"></label>
+                    <input type="text" th:value="${rent.headimgurl}" name="headimgurl" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'租赁者昵称(NickName)---'+${rent.nickname}"></label>
+                    <input type="text" th:value="${rent.nickname}" name="nickname" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'租赁者QQ(Qq)---'+${rent.qq}"></label>
+                    <input type="text" th:value="${rent.qq}" name="qq" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'租赁者识别码(OpenId)---'+${rent.openid}"></label>
+                    <input type="text" th:value="${rent.openid}" name="openid" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品上架时间(UpTime)---'+${#dates.format(rent.uptime,'yyyy-MM-dd HH:mm:ss')}"></label>
+                    <input type="text" th:value="${#dates.format(rent.uptime,'yyyy-MM-dd HH:mm:ss')}" name="uptime" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品最后修改时间(LastTime)---'+${#dates.format(rent.lasttime,'yyyy-MM-dd HH:mm:ss')}"></label>
+                    <input type="text" th:value="${#dates.format(rent.lasttime,'yyyy-MM-dd HH:mm:ss')}" name="lasttime" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:text="'商品是否上架(Active)1上架，0下架---'+${rent.active}"></label>
+                    <input th:value="${rent.active}" type="text" name="active" class="form-control">
+                </div>
+                <div class="form-actions pal">
+                    <div class="form-group mbn">
+                        <div class="col-md-offset-3 col-md-6">
+                            <button type="submit" class="lb">
+                                提交修改
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

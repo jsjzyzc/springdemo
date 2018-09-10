@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>信工二手淘</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <style>
+        .lb {
+            width: 100%;
+            height: 40px;
+            font-family: MingLiU_HKSCS;
+            color: #234f3c;
+            background: -moz-linear-gradient(
+                    top,
+                    #445A51 0%,
+                    #475e54 50%,
+                    #d8d8db);
+            background: -webkit-gradient(
+                    linear, left top, left bottom,
+                    from(#82a698),
+                    color-stop(0.50, #627e72),
+                    to(#96a8a0));
+            border-radius: 5px;
+            border: 1px solid #475e54;
+            width: 100px;
+            height: 35px;
+        }
+
+        a:link {
+            color: #91ADA1;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: #445A51;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #91ADA1;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: #445A51;
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body background="/static/img/bgshouye.jpg" style="width: 100%">
+
+<div class="row" style="margin-top: 80px; margin-left: 100px">
+    <div class="col-md-4" style="font-family:'MingLiU_HKSCS';font-weight: 100;color:#445A51;">
+        <div class="panel panel-yellow">
+            <h4 th:text="请慎重修改用户信息"></h4></div>
+        <div class="panel-body pan">
+            <form action="/index/edituser" class="form-horizontal">
+                <div class="form-group">
+                    <label for="nickname" th:text="${user.nickname}"></label>
+                    <input type="text" name="nickname" class="form-control" placeholder="">
+                </div>
+                <div class="form-actions pal">
+                    <div class="form-group mbn">
+                        <div class="col-md-offset-3 col-md-6">
+                            <button type="submit" class="lb">
+                                提交修改
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
